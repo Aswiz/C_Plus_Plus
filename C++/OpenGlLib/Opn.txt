@@ -1,0 +1,13 @@
+Разархивируем все в папку.
+Файлы
+     glut.dll
+     glut32.dll
+копируем в C:\Windows\System32 (D:\oleg\Programs\Новая папка\VC\bin)
+для файла
+     glut.h
+создадим папку по адресу C:\Program Files\Microsoft Visual Studio 11.0\VC\include
+с названием GL и скопируем туда этот файл.
+файлы
+     glut.lib
+     glut32.lib
+Копируем в папку по адресу C:\Program Files\Microsoft Visual Studio 11.0\VC\lib

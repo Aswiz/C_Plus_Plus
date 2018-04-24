@@ -1,0 +1,24 @@
+
+coulumns       = 7
+rings          = 30
+numbersOfSteps = 4159
+
+coulumns       = 7
+rings          = 30
+numbersOfSteps = 4159
+
+coulumns       = 7
+rings          = 30
+numbersOfSteps = 4159
+
+coulumns       = 7
+rings          = 30
+numbersOfSteps = 4159
+
+coulumns       = 7
+rings          = 40
+numbersOfSteps = 4194367
+
+coulumns       = 7
+rings          = 40
+numbersOfSteps = 4194367
