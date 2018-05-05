@@ -8,7 +8,7 @@
 #include <cmath>
 #include <cstring>
 #include <iomanip>      // std::setw
-
+#include <ctime>				// clock()
 // #include "txtReader.h"
 
 using namespace std;
@@ -117,6 +117,9 @@ void sortSwap(T* array, int start, int finish);
 // Сортировка вставками
 template <typename T>
 void insertionSort(char* array, int size_array, int start);
+// bool shit предназначен для визуализации сортировки
+template <typename T>
+void insertionSort(T* array, int size_array, int start, bool shit);
 
 
 
@@ -469,11 +472,9 @@ void Sort1(T* array, int size_array, int start)
 		boofer=array[start];
 		array[start]=min_array;
 		array[index_min_array]=boofer;
-
 		// std::cout << endl << min_array << '\n';
 		// std::cout << index_min_array << '\n';
 		// coutArray(array, size_array, " ", 10, 2);
-
 		start++;
 	}
 }
@@ -510,24 +511,15 @@ void insertionSort(T* array, int size_array, int start)
 {
 	for(int i=start; i<size_array; i++)
 	{
-	// coutArray(array, size_array, " ", 10, 2, i);
-	int j=i;
-	int check_index=0;
-	bool check=false;
-	while (j!=0)
-	{
-		if (array[j-1]>array[j])
+		int j=i;
+		while (j!=0)
 		{
-		sortSwap(array, j-1, j);
-		check=true;
-		check_index=j-1;
+			if (array[j-1]>array[j])
+			{
+				sortSwap(array, j-1, j);
+			}
+			j--;
 		}
-		j--;
-	}
-	// if (check)
-	// 	coutArray(array, size_array, " ", 10, 2,check_index);
-
-	// std::cout << "---------" << '\n';
 	}
 }
 template <typename T>
@@ -536,23 +528,23 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 	std::cout << "/* default " << '\n';
 	for(int i=start; i<size_array; i++)
 	{
-	coutArray(array, size_array, " ", 10, 2, i);
-	int j=i;
-	int check_index=0;
-	bool check=false;
-	while (j!=0)
-	{
-		if (array[j-1]>array[j])
+		coutArray(array, size_array, " ", 10, 2, i);
+		int j=i;
+		int check_index=0;
+		bool check=false;
+		while (j!=0)
 		{
-		sortSwap(array, j-1, j);
-		check=true;
-		check_index=j-1;
+			if (array[j-1]>array[j])
+			{
+				sortSwap(array, j-1, j);
+				check=true;
+				check_index=j-1;
+			}
+			j--;
 		}
-		j--;
-	}
-	if (check)
-		coutArray(array, size_array, " ", 10, 2,check_index);
-	std::cout << "---------" << '\n';
+		if (check)
+			coutArray(array, size_array, " ", 10, 2,check_index);
+		std::cout << "---------" << '\n';
 	}
 	coutArray(array, size_array, " ", 10, 2);
 	std::cout << "/* sorted " << '\n';
