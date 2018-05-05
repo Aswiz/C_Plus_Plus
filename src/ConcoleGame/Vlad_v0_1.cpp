@@ -1,5 +1,5 @@
 #include <iostream>
-#include <conio.h>
+//#include <conio.h>
 #include <time.h>
 using namespace std;
 const int X = 50;
@@ -54,35 +54,38 @@ int main()
 	char field[X][Y];
 	Initialize(field);
 	int counter = clock() + 1000;
-	while (true)
-	{
-		if (_kbhit())
-		{
-			auto x = _getch();
-			//75 - left
-			//77-right
-			//cout << x;
-			switch (x)
-			{
-			case 75:
-				MoveHeroLeft(field);
+	// while (true)
+	// {
+	// 	if (_kbhit())
+	// 	{
+	// 		auto x = _getch();
+	// 		//75 - left
+	// 		//77-right
+	// 		//cout << x;
+	// 		switch (x)
+	// 		{
+	// 		case 75:
+	// 			MoveHeroLeft(field);
+	// 			Show(field);
+	// 			break;
+	// 		case 77:
+	// 			MoveHeroRight(field);
+	// 			Show(field);
+	// 			break;
+	// 		default:
+	// 			break;
+	// 		}
+	// 	}
+	// 	if (clock() > counter)
+	// 	{
+	// 		AddEnemy(field, 5);
+	// 		Show(field);
+	// 		counter = clock() + 1000;
+	// 	}
+	// }
+					MoveHeroRight(field);
 				Show(field);
-				break;
-			case 77:
-				MoveHeroRight(field);
-				Show(field);
-				break;
-			default:
-				break;
-			}
-		}
-		if (clock() > counter)
-		{
-			AddEnemy(field, 5);
-			Show(field);
-			counter = clock() + 1000;
-		}
-	}
+
 }
 
 void AddEnemy(char field[X][Y],int count)
