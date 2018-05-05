@@ -370,13 +370,13 @@ void coutArray(T* array,int array_size,string spase,int endL,int setw,int target
 			std::cout << '\n';
 		}
 		if (i==target){
-		  std::cout << std::setw(setw);
-		  std::cout << array[i] << " <- ";
+			std::cout << std::setw(setw);
+			std::cout << array[i] << " <- ";
 		}
 		else
 		{
-		  std::cout << std::setw(setw);
-		  std::cout << array[i] << spase;
+			std::cout << std::setw(setw);
+			std::cout << array[i] << spase;
 		}
 	}
 	std::cout << '\n';
@@ -449,10 +449,10 @@ template <typename T>
 void randDigits(T* array, int size_array, int max, int min)
 {
 	max++;
-//    srand( time(NULL) );
+	 srand( time(NULL) );
 	for(int i=0;i<size_array;i++)
 	{
-//        array[i]=min + rand() % (max - min);
+			 array[i]=min + rand() % (max - min);
 	}
 }
 
@@ -462,7 +462,7 @@ void Sort1(T* array, int size_array, int start)
 	for(int i=start; i<size_array;i++)
 	{
 		float min_array=minOfArray(array, size_array,i),
-			  boofer;
+				boofer;
 
 		int index_min_array=indexOfMinOfArray(array, size_array, i);
 
@@ -481,54 +481,80 @@ void Sort1(T* array, int size_array, int start)
 template <typename T>
 void bubbleSort(T* array, int size_array, int start)
 {
-  float boofer;
-  for(int j=start; j<size_array; j++)
-  {
-	  for(int i=start; i<size_array-1; i++)
-	  {
+	float boofer;
+	for(int j=start; j<size_array; j++)
+	{
+		for(int i=start; i<size_array-1; i++)
+		{
 		if (array[i]>array[i+1])
 		{
-		  boofer=array[i+1];
-		  array[i+1]=array[i];
-		  array[i]=boofer;
+			boofer=array[i+1];
+			array[i+1]=array[i];
+			array[i]=boofer;
 		}
-	  }
-  }
+		}
+	}
 }
 
 template <typename T>
 void sortSwap(T* array, int start, int finish)
 {
-  float boofer;
-
-  boofer=array[finish];
-  array[finish]=array[start];
-  array[start]=boofer;
+	float boofer;
+	boofer=array[finish];
+	array[finish]=array[start];
+	array[start]=boofer;
 }
 
 template <typename T>
-void insertionSort(char* array, int size_array, int start)
+void insertionSort(T* array, int size_array, int start)
 {
-  for(int i=start; i<size_array; i++)
-  {
+	for(int i=start; i<size_array; i++)
+	{
+	// coutArray(array, size_array, " ", 10, 2, i);
+	int j=i;
+	int check_index=0;
+	bool check=false;
+	while (j!=0)
+	{
+		if (array[j-1]>array[j])
+		{
+		sortSwap(array, j-1, j);
+		check=true;
+		check_index=j-1;
+		}
+		j--;
+	}
+	// if (check)
+	// 	coutArray(array, size_array, " ", 10, 2,check_index);
+
+	// std::cout << "---------" << '\n';
+	}
+}
+template <typename T>
+void insertionSort(T* array, int size_array, int start, bool shit)
+{
+	std::cout << "/* default " << '\n';
+	for(int i=start; i<size_array; i++)
+	{
 	coutArray(array, size_array, " ", 10, 2, i);
 	int j=i;
 	int check_index=0;
 	bool check=false;
 	while (j!=0)
 	{
-	  if (array[j-1]>array[j])
-	  {
-	  sortSwap(array, j-1, j);
-	  check=true;
-	  check_index=j-1;
-	  }
-	  j--;
+		if (array[j-1]>array[j])
+		{
+		sortSwap(array, j-1, j);
+		check=true;
+		check_index=j-1;
+		}
+		j--;
 	}
 	if (check)
 		coutArray(array, size_array, " ", 10, 2,check_index);
-
 	std::cout << "---------" << '\n';
-  }
+	}
+	coutArray(array, size_array, " ", 10, 2);
+	std::cout << "/* sorted " << '\n';
 }
 
