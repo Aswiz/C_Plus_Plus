@@ -9,6 +9,8 @@
 #include <cstring>
 #include <iomanip>      // std::setw
 #include <ctime>				// clock()
+#include <unistd.h>			// sleep() / usleep()
+
 // #include "txtReader.h"
 
 using namespace std;
@@ -525,9 +527,12 @@ void insertionSort(T* array, int size_array, int start)
 template <typename T>
 void insertionSort(T* array, int size_array, int start, bool shit)
 {
+
 	std::cout << "/* default " << '\n';
 	for(int i=start; i<size_array; i++)
 	{
+		usleep(100000);
+		system("clear");
 		coutArray(array, size_array, " ", 10, 2, i);
 		int j=i;
 		int check_index=0;
@@ -544,7 +549,7 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 		}
 		if (check)
 			coutArray(array, size_array, " ", 10, 2,check_index);
-		std::cout << "---------" << '\n';
+		// std::cout << "---------" << '\n';
 	}
 	coutArray(array, size_array, " ", 10, 2);
 	std::cout << "/* sorted " << '\n';
