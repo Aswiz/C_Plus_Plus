@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-	int size_Array=10,
+	int size_Array=100,
 		min_Array=0,
 		max_Array=100;
 	float array[size_Array];

@@ -90,18 +90,14 @@ int minOfArray(T* array,int array_size);
 template <typename T>
 int minOfArray(T* array,int array_size, int start);
 
-// !!!!!!!!!!!!!!!!!!!!!!!!
-// Требуется раскомментировать строчи в функции
-// !!!!!!!!!!!!!!!!!!!!!!!!
+
 // Функция randDigits принимает числовой массив - T* array,
 // размер массива - int array_size,
 // минимальное и максимальное значение - int max, int min
 // И заполняет данный массив интовыми переменными в диапазоне от min до max
 template <typename T>
 void randDigits(T* array, int size_array, int max, int min);
-// !!!!!!!!!!!!!!!!!!!!!!!!
-// Требуется раскомментировать строчи в функции
-// !!!!!!!!!!!!!!!!!!!!!!!!
+
 
 // Еще какая-то сортировка, вроде сортировка обменом
 template <typename T>
@@ -462,27 +458,25 @@ void randDigits(T* array, int size_array, int max, int min)
 }
 
 template <typename T>
-void Sort1(T* array, int size_array, int start)
+void SelectionSort(T* array, int size_array, int start_position)
 {
-	for(int i=start; i<size_array;i++)
-	{
-		float min_array=minOfArray(array, size_array,i),
+	int index_min_array,
+			position = start_position;
+	float min_array,
 				boofer;
-
-		int index_min_array=indexOfMinOfArray(array, size_array, i);
-
-		boofer=array[start];
-		array[start]=min_array;
-		array[index_min_array]=boofer;
-		// std::cout << endl << min_array << '\n';
-		// std::cout << index_min_array << '\n';
-		// coutArray(array, size_array, " ", 10, 2);
-		start++;
+	for(int i=position; i<size_array;i++)
+	{
+		min_array = minOfArray(array, size_array,i);
+		index_min_array = indexOfMinOfArray(array, size_array, i);
+		boofer = array[position];
+		array[position] = min_array;
+		array[index_min_array] = boofer;
+		position++;
 	}
 }
 
 template <typename T>
-void bubbleSort(T* array, int size_array, int start)
+void BubbleSort(T* array, int size_array, int start)
 {
 	float boofer;
 	for(int j=start; j<size_array; j++)
@@ -531,7 +525,7 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 	std::cout << "/* default " << '\n';
 	for(int i=start; i<size_array; i++)
 	{
-		usleep(100000);
+		usleep(50000);
 		system("clear");
 		coutArray(array, size_array, " ", 10, 2, i);
 		int j=i;
@@ -555,3 +549,13 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 	std::cout << "/* sorted " << '\n';
 }
 
+void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
+{
+	std::cout << "{"<< endl;
+	std::cout << "\"sort_type\": \"" << sort_type << "\"," << endl;
+	std::cout << "\"data_type\": \"" << data_type << "\"," << endl;
+	std::cout << "\"size\": " << size_array << "," << endl;
+	std::cout << "\"time\": " << time_sorting << endl;
+	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
+	std::cout << "},"<< endl;
+} 

@@ -23,11 +23,12 @@ int main(int argc, char *argv[]) {
 	insertionSort(array,size_Array,0);
 	t[1] = clock();
 
-	coutArray(array, size_Array, " ", 20, 2);
-	usleep(1000000);
+	// coutArray(array, size_Array, " ", 20, 2);
+	// usleep(1000000);
 	system("clear");
-	std::cout << "t[0] = " << t[0] << '\n';
-	std::cout << "t[1] = " << t[1] << '\n';
+	// std::cout << "t[0] = " << t[0] << '\n';
+	// std::cout << "t[1] = " << t[1] << '\n';
+	std::cout << "\"sort_type\": \"Insertion\"" << endl;
 	std::cout << "t = " << t[1] - t[0] << '\n';
 	std::cout << "t(sec) = " << (float(t[1] - t[0])) / CLOCKS_PER_SEC<< '\n';
 
