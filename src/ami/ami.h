@@ -119,16 +119,9 @@ void insertionSort(char* array, int size_array, int start);
 template <typename T>
 void insertionSort(T* array, int size_array, int start, bool shit);
 
-// Поиск первого числа больше поинта, возвращает индекст этого числа
-// Если такого числа нет то возвращает (-1)
+// Quick sorting
 template <typename T>
-int FirstNumberLargerPoint(T* array, int finish, int start, int point);
-
-// Поиск первого числа меньше поинта, возвращает индекст этого числа
-// Если такого числа нет то возвращает (-1)
-template <typename T>
-int FirstNumberLessPoint(T* array, int finish, int start, int point);
-
+void QuickSorting(T* array, int start, int finish);
 
 int discharge(int var)
 {
@@ -567,16 +560,15 @@ void coutSortingSpeed(string sort_type, string data_type, int size_array, int ti
 	std::cout << "\t\"time\": " << time_sorting << endl;
 	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
 	std::cout << "},"<< endl;
-} 
-
+}
 
 
 template <typename T>
-int FirstNumberLargerPoint(T* array, int start, int finish, int point)
+int FirstNumberLargerIndex(T* array, int start, int finish, int point)
 {
 // Проходимся по массиву от (start) до (finish) 
 // в поисках первого числа, большего от нашего (point)`a
-	for (int i = start; i < finish; ++i)
+	for (int i = start; i <= finish; ++i)
 	{
 		// Если элемент массива больше нашего поитна то мы возвращаем его индекс
 		if (array[i]>=array[point])
@@ -588,7 +580,7 @@ int FirstNumberLargerPoint(T* array, int start, int finish, int point)
 	return -1;
 }
 template <typename T>
-int FirstNumberLessPoint(T* array, int start, int finish, int point)
+int FirstNumberLessIndex(T* array, int start, int finish, int point)
 {
 // Проходимся по массиву от (start) до (finish) 
 // в поисках первого числа, большего от нашего (point)`a
@@ -603,6 +595,7 @@ int FirstNumberLessPoint(T* array, int start, int finish, int point)
 	// Ежели такого числа нет, то мы возвращаем (-1)
 	return -1;
 }
+
 template <typename T>
 void QuickSortSwap(T* array, int lessPosition, int largePosition)
 {
@@ -614,63 +607,48 @@ void QuickSortSwap(T* array, int lessPosition, int largePosition)
 	// Перемещаем на место большего значение меньшее
 	array[largePosition] = boofer;
 }
-template <typename T>
-void QuickSortSwapPoint(T* array, int middleIndex, int pointIndex)
-{
-	T boofer;
-
-	boofer = array[middleIndex];
-	array[middleIndex] = array[pointIndex];
-	array[pointIndex] = boofer;
-}
 
 template <typename T>
-void QuickSorting(T* array, int size_array, int start)
+void QuickSorting(T* array, int start, int finish)
 {
-	if (size_array>1)
+	int size_array = finish - start + 1;
+
+	cout << "start = " << start << endl;
+	cout << "finish = " << finish << endl;
+	cout << "size_array = " << size_array << endl;
+
+
+	int point = finish;
+	cout << endl;
+	cout << "point = " << array[point] << endl;
+
+// Уменьшаем финиш на 1
+	finish--;
+
+	int lessIndex  = FirstNumberLessIndex(array, start, finish, point),
+			largeIndex = FirstNumberLargerIndex(array, start, finish, point);
+
+	while(lessIndex > largeIndex)
 	{
-		int point = start + size_array - 1, // Индекс поинта = кол-во элементов - 1
-				startPoint = start,     // Начало сортировки - start
-				finishPoint = point -1, // Конец - индекс поинта - 1
-				largeNumber,
-				largeNumber2,
-				lessNumber;
+		lessIndex  = FirstNumberLessIndex(array, start, lessIndex, point);
+		largeIndex = FirstNumberLargerIndex(array, largeIndex, finish, point);
 
-
-
-
-		while(startPoint<finishPoint)
+		if ((lessIndex>=0)&&(largeIndex>=0)&&(lessIndex > largeIndex))
 		{
-			largeNumber = FirstNumberLargerPoint(array, startPoint, finishPoint, point);
-			lessNumber  = FirstNumberLessPoint(array, startPoint, finishPoint, point);
+			cout << "lessIndex = " << lessIndex << endl;
+			cout << "largeIndex = " << largeIndex << endl;
+			QuickSortSwap(array, lessIndex, largeIndex);
 
-			if ((largeNumber>=0)&&(lessNumber>=0))
-			{
-				QuickSortSwap(array, lessNumber, largeNumber);
-				startPoint = largeNumber + 1;
-				finishPoint = lessNumber - 1;
+			lessIndex--;
+			largeIndex++;
 
-				largeNumber2 = largeNumber;
-				cout << "largeNumber2 = " << largeNumber2 << endl;
-			}
-			else
-				break;
+			coutArray(array, size_array, " ", 10, 2);
+
 		}
-		// Ищем первое число большее, чем поинт и меняем его и поинт местами
-		// largeNumber = FirstNumberLargerPoint(array, start, size_array-1, point);
-		// cout << "largeNumber = " << largeNumber << endl;
-		if (largeNumber2>=0)
-		{
-			QuickSortSwapPoint(array, largeNumber2, point);
-			point = largeNumber2;
-		}
-
-		coutArray(array, size_array, " ", 10, 2);
-		cout << "point = " << point << endl;
-		QuickSorting(array, point, start);
-		// QuickSorting(array, size_array-point-1, point+1);
-
+		else
+			break;
 	}
-	else
-		return;
+	
+	QuickSortSwap(array, point, largeIndex);			
+
 }

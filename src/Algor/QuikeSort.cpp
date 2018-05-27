@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
 		randDigits(array, size_array, max_Array, min_Array);
 		coutArray(array, size_array, " ", 10, 2);
 
-		QuickSorting(array, size_array, 0);
+		QuickSorting(array, 0, size_array-1);
 
 		coutArray(array, size_array, " ", 10, 2);
 
@@ -24,4 +24,4 @@ int main(int argc, char const *argv[]) {
 		return 0;
 }
 //
-//g++ /home/aswiz/Documents/C++/Algor/One.cpp -o Vlad
+// g++ /home/aswiz/Documents/C++/Algor/One.cpp -o Vlad
