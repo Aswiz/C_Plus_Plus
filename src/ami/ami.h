@@ -460,6 +460,24 @@ void randDigits(T* array, int size_array, int max, int min)
 }
 
 template <typename T>
+void sortingDigits(T* array, int size_array)
+{
+	for (int i = 0; i < size_array; ++i)
+	{
+		 array[i] = i;
+	}
+}
+template <typename T>
+void sortingDigits2(T* array, int size_array)
+{
+	int j=size_array;
+	for (int i = 0; i < size_array; ++i)
+	{
+		 array[i] = j;
+		 j--;
+	}
+}
+template <typename T>
 void SelectionSort(T* array, int size_array, int start_position)
 {
 	int index_min_array,
@@ -491,6 +509,31 @@ void BubbleSort(T* array, int size_array, int start)
 			array[i+1]=array[i];
 			array[i]=boofer;
 		}
+		}
+	}
+}
+
+template <typename T>
+void BubbleSortFlag(T* array, int size_array, int start)
+{
+	int k=0;
+	float boofer;
+	for(int j=start; j<size_array; j++)
+	{
+		k=0;
+		for(int i=start; i<size_array-1; i++)
+		{
+		if (array[i]>array[i+1])
+		{
+			boofer=array[i+1];
+			array[i+1]=array[i];
+			array[i]=boofer;
+			k++;
+		}
+		}
+		if (k==0)	
+		{
+			break;	
 		}
 	}
 }
@@ -551,7 +594,7 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 	std::cout << "/* sorted " << '\n';
 }
 
-void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
+/*void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
 {
 	std::cout << "{"<< endl;
 	std::cout << "\t\"sort_type\": \"" << sort_type << "\"," << endl;
@@ -560,6 +603,17 @@ void coutSortingSpeed(string sort_type, string data_type, int size_array, int ti
 	std::cout << "\t\"time\": " << time_sorting << endl;
 	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
 	std::cout << "},"<< endl;
+}*/
+void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
+{
+	// std::cout << "{"<< endl;
+	// std::cout << "\t\"sort_type\": \"" << sort_type << "\"," << endl;
+	// std::cout << "\t\"data_type\": \"" << data_type << "\"," << endl;
+	// std::cout << size_array << "\t";
+	std::cout << time_sorting << "\t";
+	// std::cout << "\t\"time\": " << time_sorting << endl;
+	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
+	// std::cout << "},"<< endl;
 }
 
 
@@ -613,42 +667,97 @@ void QuickSorting(T* array, int start, int finish)
 {
 	int size_array = finish - start + 1;
 
-	cout << "start = " << start << endl;
-	cout << "finish = " << finish << endl;
-	cout << "size_array = " << size_array << endl;
-
-
-	int point = finish;
-	cout << endl;
-	cout << "point = " << array[point] << endl;
-
-// Уменьшаем финиш на 1
-	finish--;
-
-	int lessIndex  = FirstNumberLessIndex(array, start, finish, point),
-			largeIndex = FirstNumberLargerIndex(array, start, finish, point);
-
-	while(lessIndex > largeIndex)
+	if (size_array>1)
 	{
-		lessIndex  = FirstNumberLessIndex(array, start, lessIndex, point);
-		largeIndex = FirstNumberLargerIndex(array, largeIndex, finish, point);
+		cout << "start = " << start << endl;
+		cout << "finish = " << finish << endl;
+		cout << "size_array = " << size_array << endl;
 
-		if ((lessIndex>=0)&&(largeIndex>=0)&&(lessIndex > largeIndex))
+
+		int point = finish;
+		cout << endl;
+		cout << "point = " << array[point] << endl;
+
+	// Уменьшаем финиш на 1
+		finish--;
+
+		int lessIndex  = FirstNumberLessIndex(array, start, finish, point),
+				largeIndex = FirstNumberLargerIndex(array, start, finish, point);
+
+		while(lessIndex > largeIndex)
 		{
-			cout << "lessIndex = " << lessIndex << endl;
-			cout << "largeIndex = " << largeIndex << endl;
-			QuickSortSwap(array, lessIndex, largeIndex);
+			lessIndex  = FirstNumberLessIndex(array, start, lessIndex, point);
+			largeIndex = FirstNumberLargerIndex(array, largeIndex, finish, point);
 
-			lessIndex--;
-			largeIndex++;
+			if ((lessIndex>=0)&&(largeIndex>=0)&&(lessIndex > largeIndex))
+			{
+				cout << "lessIndex = " << lessIndex << endl;
+				cout << "largeIndex = " << largeIndex << endl;
+				QuickSortSwap(array, lessIndex, largeIndex);
 
-			coutArray(array, size_array, " ", 10, 2);
+				lessIndex--;
+				largeIndex++;
 
+
+			}
+			else
+				break;
 		}
-		else
-			break;
-	}
-	
-	QuickSortSwap(array, point, largeIndex);			
 
+		if (largeIndex>0)
+		{
+		cout << "point = " << array[point] << endl;
+		QuickSortSwap(array, point, largeIndex);	
+		coutArray(array, size_array, " ", 10, 2);
+
+			int startA  = start,
+					finishA = largeIndex - 1,
+					startB  = largeIndex + 1,
+					finishB = finish+1;
+			cout << "startA = " << startA << endl;
+			cout << "finishA = " << finishA << endl;
+			cout << "*******************" << endl;
+			QuickSorting(array, startA, finishA);
+			cout << "*******************" << endl;
+			cout << "startB = " << startB << endl;
+			cout << "finishB = " << finishB << endl;
+			cout << "###################" << endl;
+			QuickSorting(array, startB, finishB);
+			cout << "###################" << endl;
+		}
+	}
+}
+
+
+void quickSort(int *numbers, int left, int right)
+{
+	int pivot;
+	int lh = left;
+	int rh = right;
+	pivot = numbers[left];
+	while (left < right)
+	{
+		while ((numbers[right] >= pivot) && (left < right))
+			right--;
+		if (left != right)
+		{
+			numbers[left] = numbers[right];
+			left++;
+		}
+		while ((numbers[left] <= pivot) && (left < right))
+			left++;
+		if (left != right)
+		{
+			numbers[right] = numbers[left];
+			right--;
+		}
+	}
+	numbers[left] = pivot;
+	pivot = left;
+	left = lh;
+	right = rh;
+	if (left < pivot)
+		quickSort(numbers, left, pivot - 1);
+	if (right > pivot)
+		quickSort(numbers, pivot + 1, right);
 }
