@@ -566,7 +566,6 @@ void insertionSort(T* array, int size_array, int start)
 template <typename T>
 void insertionSort(T* array, int size_array, int start, bool shit)
 {
-
 	std::cout << "/* default " << '\n';
 	for(int i=start; i<size_array; i++)
 	{
@@ -594,16 +593,6 @@ void insertionSort(T* array, int size_array, int start, bool shit)
 	std::cout << "/* sorted " << '\n';
 }
 
-/*void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
-{
-	std::cout << "{"<< endl;
-	std::cout << "\t\"sort_type\": \"" << sort_type << "\"," << endl;
-	std::cout << "\t\"data_type\": \"" << data_type << "\"," << endl;
-	std::cout << "\t\"size\": " << size_array << "," << endl;
-	std::cout << "\t\"time\": " << time_sorting << endl;
-	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
-	std::cout << "},"<< endl;
-}*/
 void coutSortingSpeed(string sort_type, string data_type, int size_array, int time_sorting, float time_sorting_sec)
 {
 	// std::cout << "{"<< endl;
@@ -615,119 +604,6 @@ void coutSortingSpeed(string sort_type, string data_type, int size_array, int ti
 	// std::cout << "\"time_sec\": " << time_sorting_sec << endl;
 	// std::cout << "},"<< endl;
 }
-
-
-template <typename T>
-int FirstNumberLargerIndex(T* array, int start, int finish, int point)
-{
-// Проходимся по массиву от (start) до (finish) 
-// в поисках первого числа, большего от нашего (point)`a
-	for (int i = start; i <= finish; ++i)
-	{
-		// Если элемент массива больше нашего поитна то мы возвращаем его индекс
-		if (array[i]>=array[point])
-		{
-			return i;
-		}
-	}
-	// Ежели такого числа нет, то мы возвращаем (-1)
-	return -1;
-}
-template <typename T>
-int FirstNumberLessIndex(T* array, int start, int finish, int point)
-{
-// Проходимся по массиву от (start) до (finish) 
-// в поисках первого числа, большего от нашего (point)`a
-	for (int i = finish; i >= start; --i)
-	{
-		// Если элемент массива больше нашего поитна то мы возвращаем его индекс
-		if (array[i]<array[point])
-		{
-			return i;
-		}
-	}
-	// Ежели такого числа нет, то мы возвращаем (-1)
-	return -1;
-}
-
-template <typename T>
-void QuickSortSwap(T* array, int lessPosition, int largePosition)
-{
-	T boofer;
-	// Закидываем в буффер меньшее значение
-	boofer = array[lessPosition];
-	// Перемещаем на место меньшего значения большее
-	array[lessPosition] = array[largePosition];
-	// Перемещаем на место большего значение меньшее
-	array[largePosition] = boofer;
-}
-
-template <typename T>
-void QuickSorting(T* array, int start, int finish)
-{
-	int size_array = finish - start + 1;
-
-	if (size_array>1)
-	{
-		cout << "start = " << start << endl;
-		cout << "finish = " << finish << endl;
-		cout << "size_array = " << size_array << endl;
-
-
-		int point = finish;
-		cout << endl;
-		cout << "point = " << array[point] << endl;
-
-	// Уменьшаем финиш на 1
-		finish--;
-
-		int lessIndex  = FirstNumberLessIndex(array, start, finish, point),
-				largeIndex = FirstNumberLargerIndex(array, start, finish, point);
-
-		while(lessIndex > largeIndex)
-		{
-			lessIndex  = FirstNumberLessIndex(array, start, lessIndex, point);
-			largeIndex = FirstNumberLargerIndex(array, largeIndex, finish, point);
-
-			if ((lessIndex>=0)&&(largeIndex>=0)&&(lessIndex > largeIndex))
-			{
-				cout << "lessIndex = " << lessIndex << endl;
-				cout << "largeIndex = " << largeIndex << endl;
-				QuickSortSwap(array, lessIndex, largeIndex);
-
-				lessIndex--;
-				largeIndex++;
-
-
-			}
-			else
-				break;
-		}
-
-		if (largeIndex>0)
-		{
-		cout << "point = " << array[point] << endl;
-		QuickSortSwap(array, point, largeIndex);	
-		coutArray(array, size_array, " ", 10, 2);
-
-			int startA  = start,
-					finishA = largeIndex - 1,
-					startB  = largeIndex + 1,
-					finishB = finish+1;
-			cout << "startA = " << startA << endl;
-			cout << "finishA = " << finishA << endl;
-			cout << "*******************" << endl;
-			QuickSorting(array, startA, finishA);
-			cout << "*******************" << endl;
-			cout << "startB = " << startB << endl;
-			cout << "finishB = " << finishB << endl;
-			cout << "###################" << endl;
-			QuickSorting(array, startB, finishB);
-			cout << "###################" << endl;
-		}
-	}
-}
-
 
 void quickSort(int *numbers, int left, int right)
 {
